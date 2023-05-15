@@ -8,9 +8,13 @@ import router from './router'
 
 // Vuetify
 import 'vuetify/styles'
+/* @ts-ignore */
 import { createVuetify } from 'vuetify'
+/* @ts-ignore */
 import * as components from 'vuetify/components'
+/* @ts-ignore */
 import * as directives from 'vuetify/directives'
+/* @ts-ignore */
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 const vuetify = createVuetify({

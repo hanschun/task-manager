@@ -1,8 +1,15 @@
 <script lang="ts">
 import { taskService } from '@/services/TaskService';
 import dayjs from 'dayjs';
+import { defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-export default {
+export default defineComponent({
+    setup() {
+        const route = useRoute();
+        const router = useRouter();
+        return { route, router };
+    },
     data: () => ({
         title: '',
         description: '',
@@ -12,13 +19,13 @@ export default {
     emits: [],
 
     mounted() {
-        if (this.$route.params.id) {
+        if (this.route.params.id) {
             this.fetchTask();
         }
     },
     methods: {
         async fetchTask() {
-            const task = await taskService.getTaskById(this.$route.params.id);
+            const task = await taskService.getTaskById(this.route.params.id as string);
             console.log(task);
             this.title = task.title;
             this.description = task.description;
@@ -33,20 +40,20 @@ export default {
                 dueDate: this.dueDate,
                 status: this.status,
             };
-            if (this.$route.params.id) {
-                await taskService.updateTask(this.$route.params.id, task);
+            if (this.route.params.id) {
+                await taskService.updateTask(this.route.params.id as string, task);
             } else {
                 await taskService.createTask(task);
             }
-            this.$router.push({ path: '/'});
+            this.router.push({ path: '/'});
         },
 
         async deleteTask() {
-            await taskService.deleteTask(this.$route.params.id);
-            this.$router.push({ path: '/'});
+            await taskService.deleteTask(this.route.params.id as string);
+            this.router.push({ path: '/'});
         }
     }
-}
+})
 </script>
 
 <template>
@@ -105,9 +112,9 @@ export default {
                 </v-row>
             </v-container>
             <v-btn block class="mt-2" @click.stop="upsertTask()">Submit</v-btn>
-            <v-btn block v-show="$route.params.id" class="mt-2" color="error" @click.stop="deleteTask()">Delete Task</v-btn>
-            <v-btn block class="mt-2" color="warning" @click.stop="$router.back()">Cancel</v-btn>
-        </v-form>
+            <v-btn block v-show="route.params.id" class="mt-2" color="error" @click.stop="deleteTask()">Delete Task</v-btn>
+            <v-btn block class="mt-2" color="warning" @click.stop="router.back()">Cancel</v-btn>
+        </v-form>s
     </main>
 </template>
 
