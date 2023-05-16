@@ -4,6 +4,8 @@ import type { Task } from '@prisma/client';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { TaskStatus } from '../services/TaskService';
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 dayjs.extend(relativeTime);
 
 interface TaskView extends Task {
@@ -19,7 +21,11 @@ function transformTask(task: Task): TaskView {
     };
 }
 
-export default {
+export default defineComponent({
+    setup() {
+        const router = useRouter();
+        return { router };
+    },
     data: () => ({
         tasks: [] as TaskView[],
     }),
@@ -56,13 +62,13 @@ export default {
             this.tasks[index] = transformed;
         },
         goToTask(id: number) {
-            this.$router.push({ path: `/tasks/${id}`});
+            this.router.push({ path: `/tasks/${id}`});
         },
         newTask() {
-            this.$router.push({ path: `/tasks`});
+            this.router.push({ path: `/tasks`});
         }
     }
-}
+})
 </script>
 
 <template>
