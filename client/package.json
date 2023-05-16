@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "run-p build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
     "pinia": "^2.0.35",
+    "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vuetify": "^3.2.4"

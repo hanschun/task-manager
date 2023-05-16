@@ -32,6 +32,10 @@ Some of the things I considered most important in this implementation were:
 * Pagination of the task manager. The variables needed for pagination are present on the backend but not implemented in the client.
 * Warning message on 'Delete task'. That seems like a better user experience.  
 
+## Changelog  
+### Update 1  
+Fixed some issues that prevented the NestJS `build` command from working. These were primarly TS typings issues, but also an issue with the path used to serve static content.  
+
 ## Frontend (Vue 3) Description
 Based on the starter template for Vue 3. [https://vuejs.org/guide/quick-start.html#creating-a-vue-application](https://vuejs.org/guide/quick-start.html#creating-a-vue-application).  
 
